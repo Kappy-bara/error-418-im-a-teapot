@@ -263,6 +263,10 @@
             border: 1px dashed var(--term-green);
             padding: 15px;
             background: rgba(0, 255, 65, 0.1);
+            box-sizing: border-box;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            width: 100%;
         }
 
         #finalMessage.show {
@@ -276,6 +280,7 @@
             text-decoration: none;
             border-bottom: 1px solid var(--term-green);
             transition: all 0.2s;
+            word-break: break-all;
         }
 
         .hacker-link:hover {
@@ -295,6 +300,7 @@
         /* Hacker filter for the cat image */
         img {
             max-width: 100%;
+            box-sizing: border-box;
             border: 2px solid var(--term-green);
             /* This filter turns the image into a green matrix-style hue */
             filter: grayscale(100%) contrast(200%) brightness(80%) sepia(100%) hue-rotate(80deg);
@@ -335,17 +341,49 @@
 
 
         @keyframes extreme-shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(0px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(2px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(2px, 2px) rotate(0deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
+            0% {
+                transform: translate(2px, 1px) rotate(0deg);
+            }
+
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+
+            30% {
+                transform: translate(0px, 2px) rotate(0deg);
+            }
+
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+
+            70% {
+                transform: translate(2px, 1px) rotate(-1deg);
+            }
+
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+
+            90% {
+                transform: translate(2px, 2px) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
         }
 
         /* Mobile Adjustments */
@@ -354,21 +392,28 @@
                 padding: 20px;
                 width: 90%;
             }
+
             .ascii-art {
                 font-size: 0.7rem;
                 margin-bottom: 10px;
             }
+
             h1 {
                 font-size: 1.8rem;
                 letter-spacing: 2px;
             }
-            p, input, button {
+
+            p,
+            input,
+            button {
                 font-size: 1rem;
             }
+
             input {
                 width: 90%;
                 padding: 10px;
             }
+
             .fbi-warning {
                 font-size: 0.6rem;
                 top: 5px;
@@ -376,6 +421,7 @@
                 padding: 5px;
                 transform: rotate(0deg);
             }
+
             .hacker-ticker {
                 font-size: 0.9rem;
                 padding: 5px 0;
@@ -391,10 +437,10 @@
     <div class="hacker-ticker">
         <marquee scrollamount="12">
             [SYS_MSG] DOWNLOADING MORE RAM... 99% &nbsp;&nbsp;|&nbsp;&nbsp;
-            [SYS_MSG] TRACING USER IP... 192.168.1.1 (LOCAL NODE DETECTED) &nbsp;&nbsp;|&nbsp;&nbsp;
+            [SYS_MSG] TRACING USER IP... 192.168.1.1 (LOCAL NOOB DETECTED) &nbsp;&nbsp;|&nbsp;&nbsp;
             [SYS_MSG] BYPASSING MAIN FIREWALL... ERROR: FIREWALL TOO HOT &nbsp;&nbsp;|&nbsp;&nbsp;
             [SYS_MSG] DECRYPTING SECRETS... 42% &nbsp;&nbsp;|&nbsp;&nbsp;
-            [SYS_MSG] INITIATING COFFEE BREWER OVERRIDE... SUCCESS &nbsp;&nbsp;|&nbsp;&nbsp;
+            [SYS_MSG] INITIATING INCOGNITO MODE... SUCCESS &nbsp;&nbsp;|&nbsp;&nbsp;
             [SYS_MSG] SENDING BROWSER HISTORY TO PARENTS... IN PROGRESS
         </marquee>
     </div>
@@ -403,11 +449,11 @@
         <!-- STEP 1: LOGIN -->
         <div id="step1">
             <div style="width: 100%;">
-                <div class="ascii-art" style="display: inline-block; text-align: left;">
-  ___  ___  ___   ___ 
+                <pre class="ascii-art"
+                    style="display: inline-block; text-align: left; margin: 0; font-family: inherit;">  ___  ___  ___   ___ 
  / __|/ __||   \ / __|
  \__ \\__ \| |) | (__ 
- |___/|___/|___/ \___|</div>
+ |___/|___/|___/ \___|</pre>
             </div>
             <h1 data-text="MAINFRAME LOCK">MAINFRAME LOCK<span class="blink">_</span></h1>
             <p>WARNING: UNAUTHORIZED ACCESS DETECTED.<br>> ENTER ROOT ENCRYPTION KEY TO BYPASS FIREWALL.</p>
@@ -434,29 +480,33 @@
             <img src="laughing_cat.png" alt="Laughing Cat">
 
             <div id="finalMessage">
-                > sorry for the trolling, stay tune for more updates, something big is coming this september<br><br>
-                > JOIN THE SSDC-SLIET EVENT GROUP:<br>
+                > YOU PASSED THE TEST.<br>
+                > THE SIMULATION IS ENDING. WE NEED YOUR SKILLS ON THE OUTSIDE.<br>
+                > A MASSIVE EVENT IS COMING THIS SEPTEMBER. PREPARE YOURSELF.<br><br>
+                > JOIN THE SECRET GROUP:<br>
                 <a href="https://groups.google.com/g/ssdc-sliet" target="_blank" class="hacker-link">>
                     https://groups.google.com/g/ssdc-sliet</a>
             </div>
 
-            <!-- Plays the local fahh sound -->
-            <audio id="fahhSound" src="fahh.mp3"></audio>
+            <!-- Plays the local cat laugh sound -->
+            <audio id="catLaughSound" src="cat_laugh.mp3" preload="auto"></audio>
+            <!-- Plays the local fahh sound for error -->
+            <audio id="fahhSoundError" src="fahh.mp3" preload="auto"></audio>
         </div>
     </div>
 
     <script>
         // Anti-Inspect Troll
-        document.addEventListener('contextmenu', function(e) {
+        document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
             alert("Ladle Inspect karega");
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
-            if (e.key === 'F12' || 
-               (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
-               (e.ctrlKey && ['U', 'u'].includes(e.key))) {
+            if (e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) ||
+                (e.ctrlKey && ['U', 'u'].includes(e.key))) {
                 e.preventDefault();
                 alert("Ladle Inspect karega");
             }
@@ -473,9 +523,10 @@
         });
 
         function checkPassword() {
-            const pass = input.value.toLowerCase().trim();
+            const pass = input.value.trim().toLowerCase();
+            const correctPass = 'Level67';
 
-            if (pass === 'scuba') {
+            if (pass === correctPass.toLowerCase()) {
                 // Call the API to increment the counter
                 fetch('https://script.google.com/macros/s/AKfycby6NridRIk0fzRUk5VYK48q-Re-Dekx33PcxVjQwtYbPEeqzmsc-rCSmrmJIXXQ4tPBDQ/exec', {
                     method: 'GET',
@@ -490,14 +541,24 @@
                 document.getElementById('step2').classList.remove('hidden');
             } else {
                 // Chaotic Hacker Error
+                const randomPos = Math.floor(Math.random() * correctPass.length);
+                const randomChar = correctPass[randomPos];
+
+                errorMsg.innerHTML = `> SYSTEM ERROR: INCORRECT KEY<br>> HINT: Character ${randomPos + 1} is '${randomChar}'`;
+
                 container.classList.add('error-state');
                 errorMsg.classList.remove('hidden');
                 input.value = '';
 
+                // Play the error sound
+                const errorSound = document.getElementById('fahhSoundError');
+                errorSound.currentTime = 0;
+                errorSound.play().catch(e => console.warn('Error sound failed:', e));
+
                 setTimeout(() => {
                     container.classList.remove('error-state');
                     errorMsg.classList.add('hidden');
-                }, 1000);
+                }, 1500);
             }
         }
 
@@ -505,7 +566,7 @@
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step3').classList.remove('hidden');
 
-            const audio = document.getElementById('fahhSound');
+            const audio = document.getElementById('catLaughSound');
 
             // Show the text after the audio finishes playing
             audio.onended = () => {
