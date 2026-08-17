@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
             --term-red: #ff003c;
         }
 
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             background-color: #000;
@@ -30,7 +32,10 @@
             content: " ";
             display: block;
             position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 2;
             background-size: 100% 2px, 3px 100%;
@@ -42,8 +47,13 @@
         }
 
         @keyframes flicker {
-            0% { opacity: 0.95; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 0.95;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
 
         .container {
@@ -76,7 +86,9 @@
         }
 
         @keyframes blink {
-            50% { opacity: 0; }
+            50% {
+                opacity: 0;
+            }
         }
 
         p {
@@ -126,23 +138,31 @@
         }
 
         /* Error state flashes the whole terminal red */
-        .error-state {
+        .error-state,
+        .error-state h1,
+        .error-state p,
+        .error-state .ascii-art {
             color: var(--term-red) !important;
             border-color: var(--term-red) !important;
+            text-shadow: 0 0 15px var(--term-red) !important;
+        }
+
+        .error-state.container {
             box-shadow: 0 0 30px var(--term-red), inset 0 0 25px var(--term-red) !important;
-            text-shadow: 0 0 10px var(--term-red) !important;
         }
 
         .error-state button {
-            color: var(--term-red);
-            border-color: var(--term-red);
-            box-shadow: 0 0 10px var(--term-red);
+            color: var(--term-red) !important;
+            border-color: var(--term-red) !important;
+            box-shadow: 0 0 15px var(--term-red) !important;
+            text-shadow: 0 0 10px var(--term-red) !important;
         }
 
         .error-state input {
-            color: var(--term-red);
-            border-color: var(--term-red);
-            box-shadow: 0 0 10px inset var(--term-red);
+            color: var(--term-red) !important;
+            border-color: var(--term-red) !important;
+            box-shadow: 0 0 15px inset var(--term-red) !important;
+            text-shadow: 0 0 10px var(--term-red) !important;
         }
 
         #finalMessage {
@@ -152,7 +172,7 @@
             transition: opacity 1s;
             border: 1px dashed var(--term-green);
             padding: 15px;
-            background: rgba(0,255,65,0.1);
+            background: rgba(0, 255, 65, 0.1);
         }
 
         #finalMessage.show {
@@ -193,31 +213,34 @@
         }
     </style>
 </head>
+
 <body class="crt-flicker">
 
     <div class="container" id="mainContainer">
         <!-- STEP 1: LOGIN -->
         <div id="step1">
             <div class="ascii-art">
-  ___  ___  ___   ___ 
- / __|/ __||   \ / __|
- \__ \\__ \| |) | (__ 
- |___/|___/|___/ \___|
+                ___ ___ ___ ___
+                / __|/ __|| \ / __|
+                \__ \\__ \| |) | (__
+                |___/|___/|___/ \___|
             </div>
             <h1>MAINFRAME LOCK<span class="blink">_</span></h1>
             <p>WARNING: UNAUTHORIZED ACCESS DETECTED.<br>> ENTER ROOT ENCRYPTION KEY TO BYPASS FIREWALL.</p>
-            
+
             <input type="password" id="passwordInput" placeholder="ROOT_PASSWORD" autocomplete="off">
             <br>
-            <p id="errorMsg" class="hidden" style="margin-top: 15px; color: var(--term-red); font-weight: bold;">> SYSTEM ERROR: INCORRECT KEY</p>
-            
+            <p id="errorMsg" class="hidden" style="margin-top: 15px; color: var(--term-red); font-weight: bold;">>
+                SYSTEM ERROR: INCORRECT KEY</p>
+
             <button onclick="checkPassword()">EXECUTE HACK</button>
         </div>
 
         <!-- STEP 2: CONGRATULATIONS -->
         <div id="step2" class="hidden">
             <h1>> ACCESS GRANTED</h1>
-            <p>Congratulation, you have solved this puzzle, You get the special reward of knowing the following fact before everyone else. Are you ready for the fact?</p>
+            <p>Congratulation, you have solved this puzzle, You get the special reward of knowing the following fact
+                before everyone else. Are you ready for the fact?</p>
             <button onclick="showFact()">INITIALIZE DATABANK</button>
         </div>
 
@@ -225,13 +248,14 @@
         <div id="step3" class="hidden">
             <!-- Funny green tech filter applied to the local laughing cat image -->
             <img src="laughing_cat.png" alt="Laughing Cat">
-            
+
             <div id="finalMessage">
                 > sorry for the trolling, stay tune for more updates, something big is coming this september<br><br>
-                > JOIN THE SSDC-SLIET DATABANK:<br>
-                <a href="https://groups.google.com/g/ssdc-sliet" target="_blank" class="hacker-link">> https://groups.google.com/g/ssdc-sliet</a>
+                > JOIN THE SSDC-SLIET EVENT GROUP:<br>
+                <a href="https://groups.google.com/g/ssdc-sliet" target="_blank" class="hacker-link">>
+                    https://groups.google.com/g/ssdc-sliet</a>
             </div>
-            
+
             <!-- Plays the local fahh sound -->
             <audio id="fahhSound" src="fahh.mp3"></audio>
         </div>
@@ -241,7 +265,7 @@
         const input = document.getElementById("passwordInput");
         const container = document.getElementById("mainContainer");
         const errorMsg = document.getElementById("errorMsg");
-        
+
         input.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault();
@@ -251,7 +275,7 @@
 
         function checkPassword() {
             const pass = input.value.toLowerCase().trim();
-            
+
             if (pass === 'scuba') {
                 // Call the API to increment the counter
                 fetch('https://script.google.com/macros/s/AKfycby6NridRIk0fzRUk5VYK48q-Re-Dekx33PcxVjQwtYbPEeqzmsc-rCSmrmJIXXQ4tPBDQ/exec', {
@@ -268,7 +292,7 @@
                 container.classList.add('error-state');
                 errorMsg.classList.remove('hidden');
                 input.value = '';
-                
+
                 setTimeout(() => {
                     container.classList.remove('error-state');
                     errorMsg.classList.add('hidden');
@@ -297,4 +321,5 @@
         }
     </script>
 </body>
+
 </html>
