@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIGA HACKER MAINFRAME</title>
+    <style>
+        :root {
+            --term-green: #00ff41;
+            --term-dark: #001100;
+            --term-red: #ff003c;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: var(--term-green);
+            font-family: 'Courier New', Courier, monospace;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* CRT Screen Effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.95; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            border: 2px solid var(--term-green);
+            padding: 50px;
+            width: 95%;
+            max-width: 1000px;
+            background-color: var(--term-dark);
+            box-shadow: 0 0 20px var(--term-green), inset 0 0 15px var(--term-green);
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--term-green);
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        input {
+            background: #000;
+            color: var(--term-green);
+            border: 1px solid var(--term-green);
+            padding: 15px;
+            font-size: 1.2rem;
+            font-family: inherit;
+            width: 80%;
+            text-align: center;
+            outline: none;
+            text-shadow: 0 0 5px var(--term-green);
+            box-shadow: 0 0 10px inset var(--term-green);
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            background: #002200;
+        }
+
+        button {
+            margin-top: 30px;
+            background: #000;
+            color: var(--term-green);
+            border: 2px solid var(--term-green);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 0 0 10px var(--term-green);
+        }
+
+        button:hover {
+            background: var(--term-green);
+            color: #000;
+            box-shadow: 0 0 30px var(--term-green);
+        }
+
+        /* Error state flashes the whole terminal red */
+        .error-state {
+            color: var(--term-red) !important;
+            border-color: var(--term-red) !important;
+            box-shadow: 0 0 30px var(--term-red), inset 0 0 25px var(--term-red) !important;
+            text-shadow: 0 0 10px var(--term-red) !important;
+        }
+
+        .error-state button {
+            color: var(--term-red);
+            border-color: var(--term-red);
+            box-shadow: 0 0 10px var(--term-red);
+        }
+
+        .error-state input {
+            color: var(--term-red);
+            border-color: var(--term-red);
+            box-shadow: 0 0 10px inset var(--term-red);
+        }
+
+        #finalMessage {
+            font-size: 1.2rem;
+            margin-top: 25px;
+            opacity: 0;
+            transition: opacity 1s;
+            border: 1px dashed var(--term-green);
+            padding: 15px;
+            background: rgba(0,255,65,0.1);
+        }
+
+        #finalMessage.show {
+            opacity: 1;
+        }
+
+        .hacker-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--term-green);
+            text-decoration: none;
+            border-bottom: 1px solid var(--term-green);
+            transition: all 0.2s;
+        }
+
+        .hacker-link:hover {
+            color: #000;
+            background-color: var(--term-green);
+            text-shadow: none;
+        }
+
+        .ascii-art {
+            font-size: 1.5rem;
+            white-space: pre;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: bold;
+        }
+
+        /* Hacker filter for the cat image */
+        img {
+            max-width: 100%;
+            border: 2px solid var(--term-green);
+            /* This filter turns the image into a green matrix-style hue */
+            filter: grayscale(100%) contrast(200%) brightness(80%) sepia(100%) hue-rotate(80deg);
+            box-shadow: 0 0 15px var(--term-green);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="crt-flicker">
+
+    <div class="container" id="mainContainer">
+        <!-- STEP 1: LOGIN -->
+        <div id="step1">
+            <div class="ascii-art">
+  ___  ___  ___   ___ 
+ / __|/ __||   \ / __|
+ \__ \\__ \| |) | (__ 
+ |___/|___/|___/ \___|
+            </div>
+            <h1>MAINFRAME LOCK<span class="blink">_</span></h1>
+            <p>WARNING: UNAUTHORIZED ACCESS DETECTED.<br>> ENTER ROOT ENCRYPTION KEY TO BYPASS FIREWALL.</p>
+            
+            <input type="password" id="passwordInput" placeholder="ROOT_PASSWORD" autocomplete="off">
+            <br>
+            <p id="errorMsg" class="hidden" style="margin-top: 15px; color: var(--term-red); font-weight: bold;">> SYSTEM ERROR: INCORRECT KEY</p>
+            
+            <button onclick="checkPassword()">EXECUTE HACK</button>
+        </div>
+
+        <!-- STEP 2: CONGRATULATIONS -->
+        <div id="step2" class="hidden">
+            <h1>> ACCESS GRANTED</h1>
+            <p>Congratulation, you have solved this puzzle, You get the special reward of knowing the following fact before everyone else. Are you ready for the fact?</p>
+            <button onclick="showFact()">INITIALIZE DATABANK</button>
+        </div>
+
+        <!-- STEP 3: CAT AND SOUND -->
+        <div id="step3" class="hidden">
+            <!-- Funny green tech filter applied to the local laughing cat image -->
+            <img src="laughing_cat.png" alt="Laughing Cat">
+            
+            <div id="finalMessage">
+                > sorry for the trolling, stay tune for more updates, something big is coming this september<br><br>
+                > JOIN THE SSDC-SLIET DATABANK:<br>
+                <a href="https://groups.google.com/g/ssdc-sliet" target="_blank" class="hacker-link">> https://groups.google.com/g/ssdc-sliet</a>
+            </div>
+            
+            <!-- Plays the local fahh sound -->
+            <audio id="fahhSound" src="fahh.mp3"></audio>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById("passwordInput");
+        const container = document.getElementById("mainContainer");
+        const errorMsg = document.getElementById("errorMsg");
+        
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
+
+        function checkPassword() {
+            const pass = input.value.toLowerCase().trim();
+            
+            if (pass === 'scuba') {
+                // Call the API to increment the counter
+                fetch('https://script.google.com/macros/s/AKfycby6NridRIk0fzRUk5VYK48q-Re-Dekx33PcxVjQwtYbPEeqzmsc-rCSmrmJIXXQ4tPBDQ/exec', {
+                    method: 'GET',
+                    mode: 'no-cors'
+                }).catch(e => console.warn('Counter API failed:', e));
+
+                // Success transition
+                container.classList.remove('error-state');
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+            } else {
+                // Chaotic Hacker Error
+                container.classList.add('error-state');
+                errorMsg.classList.remove('hidden');
+                input.value = '';
+                
+                setTimeout(() => {
+                    container.classList.remove('error-state');
+                    errorMsg.classList.add('hidden');
+                }, 1000);
+            }
+        }
+
+        function showFact() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+
+            const audio = document.getElementById('fahhSound');
+
+            // Show the text after the audio finishes playing
+            audio.onended = () => {
+                document.getElementById('finalMessage').classList.add('show');
+            };
+
+            audio.play().catch(e => {
+                console.warn("Audio playback failed.", e);
+                // Fallback to show text after 2 seconds if audio fails
+                setTimeout(() => {
+                    document.getElementById('finalMessage').classList.add('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
